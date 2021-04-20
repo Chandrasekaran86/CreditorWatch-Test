@@ -25,6 +25,7 @@ You can either run the tests with the integrated Visual Studio Code Debug Script
 Local Android Test Execution
 npm run test:android
 
+
 Local Android Smoke Test Execution
 npm run test:android-smoke
 
