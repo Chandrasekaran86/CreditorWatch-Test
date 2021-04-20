@@ -1,0 +1,7 @@
+/node_modules
+/JenkinsFile
+/allure-results
+/.github
+/.git
+/.vscode
+/.gitignore
