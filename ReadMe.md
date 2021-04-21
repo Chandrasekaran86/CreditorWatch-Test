@@ -48,6 +48,7 @@ The test development activity was completed using the following browsers:
 In case if a different version of these browsers are used, 
 
     1. The following commands should be executed in the project folder. To use the latest version, the '@<version>' can be ommitted.
+    
 ```
         $ npm install chromedriver@<version> --save-dev
         $ npm install geckodriver@<version> --save-dev
@@ -91,13 +92,13 @@ $ npm run test:firefox:smoke
 
 ```
 
-Complete test execution in both browsers
+Complete test execution in both browsers in parallel
 ```
 $ npm run test
 
 ```
 
-Smoke test execution in both browsers
+Smoke test execution in both browsers in parallel
 ```
 $ npm run test:smoke
 
