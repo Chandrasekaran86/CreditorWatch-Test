@@ -41,15 +41,19 @@ $ npm install
 ```
 ## 1.3. **Update Browser Drivers**
 The test development activity was completed using the following browsers:
+
     a. Chrome(version -  79.0.3945.79)
     b. Firfox(version - 79.0)
+    
 In case if a different version of these browsers are used, 
+
     1. The following commands should be executed in the project folder. To use the latest version, the '@<version>' can be ommitted.
 ```
         $ npm install chromedriver@<version> --save-dev
         $ npm install geckodriver@<version> --save-dev
 
 ```
+
  2. The following lines in config files, available in the ./config folder should be updated
 
     a. In the "wdio.creditorwatch.chrome.conf.js" file, update the chrome driver version in the hightlighted section, as given below:
