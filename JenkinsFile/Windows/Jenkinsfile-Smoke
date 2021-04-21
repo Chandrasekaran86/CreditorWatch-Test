@@ -1,0 +1,59 @@
+properties([gitLabConnection(''), parameters([choice(choices: ['Chrome', 'Firefox', 'Both'], description: 'Browser options', name: 'Browser')])])
+
+pipeline {
+
+  agent any
+  
+  environment {
+    CI = 'true'
+  }
+
+  stages {
+      
+    stage('Prepare') {
+      steps {
+        bat 'if exist "dist" rd /s /q dist'
+        bat 'if not exist "dist" mkdir dist'
+      }
+    }  
+
+    stage('Test Bag') {
+               
+      steps {
+          bat 'npm ci'
+
+      script {
+        def browser =  "${Browser}"
+        if(browser=='Chrome') {
+            testExec = 'npm run test:chrome:smoke'
+        }else if(browser=='Firefox') {
+            testExec = 'npm run test:firefox:smoke'
+        }else if(browser=='Both') {
+            testExec = 'npm run test:smoke'
+        }
+        bat "${testExec}"
+      }      
+    stash name: 'allure-results', includes: 'allure-results/*'
+    }
+   }
+  }
+
+  post {
+    always {
+      unstash 'allure-results'
+      script {
+        allure results: [[path: 'allure-results']]
+        def buildResult = "${currentBuild.currentResult}"
+        def color
+        if(buildResult=='SUCCESS'){
+           color = '#B6D7A8'
+        }else if(buildResult=='FAILURE'){
+           color = '#FF0000'
+        }else {
+           color = '#FFE599'
+        }  
+      // office365ConnectorSend message:"Regression Test Build - ${env.JOB_NAME}      Build No - ${env.BUILD_NUMBER}", status:"${currentBuild.currentResult}", webhookUrl:"<Create a Webhook for a channel and provide this URL information>", color:"${color}"
+      }
+    }   
+  }
+}
