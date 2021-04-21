@@ -29,7 +29,7 @@ The following softwares needs to be installed in the system and its location nee
 
 1. Clone the git repo
 ```
-$ git clone
+$ git clone https://github.com/Chandrasekaran86/CreditorWatch-Test.git
 
 ```
 2. Install the dependencies. 
